@@ -34,11 +34,11 @@ def main():
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
     # load the reference surface that will be searched in the video stream
     dir_name = os.getcwd()
-    model = cv2.imread(os.path.join(dir_name, 'reference/model.jpg'), 0)
+    model = cv2.imread(os.path.join(dir_name, 'reference/surface.jpg'), 0)
     # Compute model keypoints and its descriptors
     kp_model, des_model = orb.detectAndCompute(model, None)
     # Load 3D model from OBJ file
-    obj = OBJ(os.path.join(dir_name, 'models/fox.obj'), swapyz=True)  
+    obj = OBJ(os.path.join(dir_name, 'models/rat.obj'), swapyz=True)  
     # init video capture
     cap = cv2.VideoCapture(0)
 
@@ -101,7 +101,7 @@ def render(img, obj, projection, model, color=False):
     Render a loaded obj model into the current video frame
     """
     vertices = obj.vertices
-    scale_matrix = np.eye(3) * 3
+    scale_matrix = np.eye(3) * 3.35
     h, w = model.shape
 
     for face in obj.faces:
